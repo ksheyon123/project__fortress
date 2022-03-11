@@ -1,0 +1,1 @@
+export { InGamePage } from "./InGamePage";
