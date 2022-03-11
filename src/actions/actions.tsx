@@ -15,29 +15,32 @@ export const fire = (canvas: any) => {
   const y = 240;
   const r = 2;
 
-  let velocity = 5;
-  let distance = 0;
+  let velocity = 50;
   let gravity = -9.8;
   let iteration = 0;
   let time = 100;
-  let deg = 0;
+  let radian = 45 * (-1);
+  let deg = 180 / Math.PI;
   const animate = setInterval(() => {
-    // ctx.clearRect(x - r + moveSize, y - r - drop, 4, 4);
-    distance += velocity;
-    const moveX = x + distance;
-    const maxHeight = Math.abs(Math.pow(velocity, 2) / (2 * gravity));
+    const vx = Math.cos(radian / deg) * velocity;
+    const vy = Math.sin(radian / deg) * velocity;
 
+    const dx = vx * iteration * time * 0.001;
+    const dy = vy * iteration * time * 0.001 - (0.5) * gravity * Math.pow((iteration * time * 0.001), 2);
+    const moveX = x + dx;
     // vt - (0.5)gt^2;
     // 
-    const moveY = (-1) * ((velocity * time * iteration * 0.001) - (0.5 * gravity * time * time * iteration * 0.001 * 0.001));
+    const moveY = y + dy
+    ctx.clearRect(dx, dy, 20, 20);
+
     ctx.beginPath();
-    ctx.arc(moveX, y - moveY, r, 0, Math.PI * 2, true);
+    ctx.arc(moveX, moveY, r, 0, Math.PI * 2, true);
     ctx.fillStyle = 'blue';
     ctx.fill();
-    // if (moveX >= 400) {
-    //   clearInterval(animate);
-    //   // ctx.clearRect(x - r + moveSize, y - r - iteration, 20, 20);
-    // }
+    if (moveX >= 400) {
+      clearInterval(animate);
+      // ctx.clearRect(x - r + moveSize, y - r - iteration, 20, 20);
+    }
     iteration++
-  }, time);
+  }, 30);
 }

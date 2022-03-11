@@ -19,8 +19,14 @@ const Canvas: React.FC = () => {
     <>
       <canvas
         ref={canvasRef as RefObject<HTMLCanvasElement>}
-        id="game-screen" width="800px" height="600px">
-
+        id="game-screen"
+        width="1440px"
+        height="800px"
+        style={{
+          margin: "20px",
+          backgroundColor: "#EBEBEB",
+          borderBottom: "1px solid #323232"
+        }}>
       </canvas>
       <button onClick={() => handleOnFire()}>Fire!</button>
     </>
