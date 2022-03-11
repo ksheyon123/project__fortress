@@ -6,10 +6,6 @@ type PositionProps = {
   y: number;
 }
 
-type Velocity = {
-  velocity: number;
-}
-
 const unitPositionState = atom<PositionProps>({
   key: "unitPositionState",
   default: {
@@ -19,14 +15,18 @@ const unitPositionState = atom<PositionProps>({
   },
 });
 
-const windVelocity = atom<Velocity>({
-  key: "windVelocity",
-  default: {
-    velocity: 0
-  }
+const windVelocityState = atom<number>({
+  key: "windVelocityState",
+  default: 0
+});
+
+const shootingDegreeState = atom<number>({
+  key: "shootingDegreeState",
+  default: 45
 })
 
 export {
   unitPositionState,
-  windVelocity
+  windVelocityState,
+  shootingDegreeState
 }

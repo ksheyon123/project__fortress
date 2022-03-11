@@ -1,41 +1,46 @@
-import React, { useEffect, useRef, RefObject } from "react";
+import React, { useEffect, useRef, RefObject, useState } from "react";
 import {
-  useRecoilValue
+  useRecoilValue,
+  useRecoilState
 } from 'recoil';
 import {
-  unitPositionState
+  unitPositionState, windVelocityState,
 } from "../../state/atom";
 import {
   createMarble,
-  fire
+  setWindVelocity
 } from "../../actions/actions";
 
 const Canvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>();
   const position = useRecoilValue(unitPositionState);
 
+  const canvasWidth = window.screen.availWidth - 40 + "px";
+  const canvasHeight = window.screen.availHeight - 300 + "px";
+
+  useEffect(() => {
+    setInterval(() => {
+      setWindVelocity(-50)
+    }, 5000);
+  }, []);
+
   useEffect(() => {
     createMarble(position, canvasRef.current);
   }, [position, canvasRef]);
-
-  const handleOnFire = () => {
-    fire(position, canvasRef.current);
-  }
 
   return (
     <>
       <canvas
         ref={canvasRef as RefObject<HTMLCanvasElement>}
         id="game-screen"
-        width="1440px"
-        height="800px"
+        width={canvasWidth}
+        height={canvasHeight}
         style={{
           margin: "20px",
-          backgroundColor: "#EBEBEB",
-          borderBottom: "1px solid #323232"
+          backgroundColor: "#FFF",
+          border: "1px solid #323232"
         }}>
       </canvas>
-      <button onClick={() => handleOnFire()}>Fire!</button>
     </>
   )
 }
