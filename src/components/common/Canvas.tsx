@@ -1,18 +1,25 @@
 import React, { useEffect, useRef, RefObject } from "react";
 import {
+  useRecoilValue
+} from 'recoil';
+import {
+  unitPositionState
+} from "../../state/atom";
+import {
   createMarble,
   fire
 } from "../../actions/actions";
 
 const Canvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>();
+  const position = useRecoilValue(unitPositionState);
 
   useEffect(() => {
-    createMarble(canvasRef.current);
-  }, [canvasRef]);
+    createMarble(position, canvasRef.current);
+  }, [position, canvasRef]);
 
   const handleOnFire = () => {
-    fire(canvasRef.current);
+    fire(position, canvasRef.current);
   }
 
   return (
