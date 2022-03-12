@@ -12,7 +12,7 @@ import {
 } from "../../actions/actions";
 
 const StyledController = styled.div`
-  position: fixed;
+position: fixed;
   bottom : 0;
   width : 100vw;
   height : 150px;
