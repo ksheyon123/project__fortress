@@ -32,7 +32,6 @@ const Canvas: React.FC = () => {
   const {
     widthNum,
     heightNum,
-    cellSize
   } = gridSpec;
 
   const canvasWidth = widthNum + "px"
