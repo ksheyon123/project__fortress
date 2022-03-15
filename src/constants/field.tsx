@@ -1,10 +1,7 @@
-export const Apple = {
-  mass: 3,
-  x: 0,
-  y: 0,
-  velocity: 12,
-  isForward: true,
-  projectile: 2
+export const gridSpec = {
+  widthNum: 4000,
+  heightNum: 4000,
+  cellSize: 100,
 }
 
 export const player = [

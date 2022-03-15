@@ -2,14 +2,17 @@ import React, { useEffect, useRef, RefObject, useState, MouseEvent } from "react
 import styled from "styled-components";
 import {
   useRecoilValue,
-  useRecoilState
+
 } from 'recoil';
 import {
   unitLocationState,
 } from "../../state/atom";
 import {
+  gridSpec
+} from "../../constants/field";
+import {
+  createGridTemplate,
   createMarble,
-  setWindVelocity
 } from "../../actions/actions";
 
 const StyledCanvasWrapper = styled.div`
@@ -26,55 +29,18 @@ const Canvas: React.FC = () => {
 
   const location = useRecoilValue(unitLocationState);
 
-  console.log(location);
-
-  const widthNum = 4000;
-  const heightNum = 4000;
-
-  const cellSize = 100;
+  const {
+    widthNum,
+    heightNum,
+    cellSize
+  } = gridSpec;
 
   const canvasWidth = widthNum + "px"
   const canvasHeight = heightNum + "px";
-
-  // 격자 무늬 그리기
-  useEffect(() => {
-    const ref: any = canvasRef.current;
-    const ctx = ref.getContext("2d");
-    for (var x = 0; x < widthNum; x += cellSize) {
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, heightNum);
-    }
-
-    for (var y = 0; y < heightNum; y += cellSize) {
-      ctx.moveTo(0, y);
-      ctx.lineTo(widthNum, y);
-    }
-    ctx.strokeStyle = "#ddd";
-    ctx.stroke();
-  }, [canvasRef]);
-
-  // Set Unit Position;
-  useEffect(() => {
-    // setUnit({
-    //   lookingDirection: 0,
-    //   x: 50,
-    //   y: 50
-    // })
-  }, []);
-
   // Draw Unit
   useEffect(() => {
-    const {
-      x, y
-    } = location;
     const ref: any = canvasRef.current;
-    const ctx = ref.getContext("2d");
-    const r = 10;
-    ctx.beginPath();
-    ctx.arc(x, y, r, 0, Math.PI * 2, true);
-    ctx.fillStyle = 'blue';
-    ctx.fill();
-    ctx.closePath();
+    createMarble(location, ref)
   }, [canvasRef, location]);
 
   // canvas drag & drop

@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import {
-  useRecoilState
+  useRecoilState,
+  useSetRecoilState,
+  useRecoilCallback
 } from "recoil";
 import {
   unitLocationState,
-
 } from '../../state/atom';
 import {
 } from "../../actions/actions";
@@ -19,24 +20,40 @@ position: fixed;
 `;
 
 const Controller: React.FC = () => {
+  const setUnit = useSetRecoilState(unitLocationState);
 
-  const [location, setUnit] = useRecoilState(unitLocationState);
+  const handleUnitLocation = useRecoilCallback(({ snapshot }) => async (code: string) => {
 
+    const _location = await snapshot.getPromise(unitLocationState);
 
-  const handleBackward = () => {
-    setUnit({
-      ...location,
-      x: location.x - 10
-    })
-  };
+    if (code === "ArrowRight") {
+      setUnit({
+        ..._location,
+        x: _location.x + 10
+      })
+    }
 
-  const handleForward = () => {
-    console.log(location.x);
-    setUnit({
-      ...location,
-      x: location.x + 10
-    })
-  }
+    if (code === "ArrowLeft") {
+      setUnit({
+        ..._location,
+        x: _location.x - 10
+      })
+    }
+
+    if (code === "ArrowUp") {
+      setUnit({
+        ..._location,
+        y: _location.y - 10
+      })
+    }
+
+    if (code === "ArrowDown") {
+      setUnit({
+        ..._location,
+        y: _location.y + 10
+      })
+    }
+  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", (e: KeyboardEvent) => {
@@ -44,19 +61,7 @@ const Controller: React.FC = () => {
         code
       } = e;
       // code : ArrowLeft, ArrowRight, ArrowUp, ArrowDown
-      console.log(code);
-      if (code === 'ArrowRight') {
-        handleForward();
-      }
-      if (code === 'ArrowLeft') {
-        handleBackward();
-      }
-      if (code === 'ArrowUp') {
-
-      }
-      if (code === 'ArrowDown') {
-
-      }
+      handleUnitLocation(code);
     })
   }, []);
 
