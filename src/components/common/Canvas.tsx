@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, RefObject, useState } from "react";
+import React, { useEffect, useRef, RefObject, useState, MouseEvent } from "react";
+import styled from "styled-components";
 import {
   useRecoilValue,
   useRecoilState
@@ -11,8 +12,18 @@ import {
   setWindVelocity
 } from "../../actions/actions";
 
+const StyledCanvasWrapper = styled.div`
+  overflow : hidden;
+  width : 100vw;
+  height : calc(100vh - 150px);
+`;
+
 const Canvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>();
+
+  const [canvasX, setCanvasX] = useState<number>(0);
+  const [canvasY, setCanvasY] = useState<number>(0);
+
   const position = useRecoilValue(unitPositionState);
 
   const widthNum = 4000;
@@ -47,27 +58,11 @@ const Canvas: React.FC = () => {
   }, [canvasRef]);
 
   // 격자에 Object 배치하기
-  useEffect(() => {
-    const objectArr = [];
-    const totalCell = 160;
-    const animalCount = 15;
-    const woodCount = 60;
-    const wallCount = 30;
-    const mud = 55;
-
-  }, [canvasRef]);
-
-  // Turret이 하늘에서 떨어져서 임의의 위치에 설정
-
-  // useEffect(() => {
-  //   createMarble(position, canvasRef.current);
-  // }, [position, canvasRef]);
 
   // player Positioning
   useEffect(() => {
     const ref: any = canvasRef.current;
     const ctx = ref.getContext("2d");
-    // ctx.clearRect(0, 0, widthNum, heightNum);
     const r = 10;
     ctx.beginPath();
     ctx.arc(50, 50, r, 0, Math.PI * 2, true);
@@ -76,18 +71,56 @@ const Canvas: React.FC = () => {
     ctx.closePath();
   }, [canvasRef]);
 
+  // canvas drag & drop
+  useEffect(() => {
+    const ref: any = canvasRef.current;
+    let prevMouseX: number;
+    let prevMouseY: number;
+    ref.addEventListener("mousedown", (e: MouseEvent) => {
+      const x = e.screenX;
+      const y = e.screenY;
+      prevMouseX = x;
+      prevMouseY = y;
+      console.log("MouseDown (x : " + x + ", y : " + y + ')');
+    })
+
+    ref.addEventListener("mouseup", (e: MouseEvent) => {
+      const x = e.screenX;
+      const y = e.screenY;
+      const dx = prevMouseX - x;
+      const dy = prevMouseY - y;
+
+      if (canvasX - dx < 0) {
+        setCanvasX(0);
+      } else {
+        setCanvasX(dx);
+      }
+      if (canvasY - dy < 0) {
+        setCanvasY(0);
+      } else {
+        setCanvasY(dy);
+      }
+    })
+  }, []);
+
   return (
-    <canvas
-      ref={canvasRef as RefObject<HTMLCanvasElement>}
-      id="game-screen"
-      width={canvasWidth}
-      height={canvasHeight}
-      style={{
-        backgroundColor: "#FFF",
-        border: "3px solid #323232",
-        marginBottom: 150
-      }}>
-    </canvas>
+    <StyledCanvasWrapper>
+      <canvas
+        ref={canvasRef as RefObject<HTMLCanvasElement>}
+        id="game-screen"
+        width={canvasWidth}
+        height={canvasHeight}
+        style={{
+          backgroundColor: "#FFF",
+          border: "3px solid #323232",
+          marginBottom: 150,
+          position: "relative",
+          top: canvasY,
+          left: canvasX
+        }}>
+      </canvas>
+    </StyledCanvasWrapper>
+
   )
 }
 
