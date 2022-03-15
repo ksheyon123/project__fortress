@@ -25,8 +25,6 @@ export const createMarble = (position: any, canvas: any) => {
   ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-
-
   // Unit 만들기
   const r = 10;
   ctx.beginPath();
@@ -38,11 +36,13 @@ export const createMarble = (position: any, canvas: any) => {
   createGridTemplate()
 
   // 강조
-  emphasizeUnitBorder(position);
+  unitBorder(position);
+
+  // 상호작용 영역
+  interactionArea(position);
 }
 
-const emphasizeUnitBorder = (position: any) => {
-  console.log(position.x);
+const unitBorder = (position: any) => {
   let startX = Math.floor(position.x / 100) * 100;
   let startY = Math.floor(position.y / 100) * 100;
   ctx.beginPath();
@@ -50,4 +50,59 @@ const emphasizeUnitBorder = (position: any) => {
   ctx.strokeStyle = "#323232";
   ctx.stroke();
   ctx.closePath();
+}
+
+const interactionArea = (position: any) => {
+
+  const {
+    x,
+    y
+  } = position;
+
+  const curX = x;
+  const curY = y;
+
+  const boxStartX = Math.floor(x / 100) * 100;
+  const boxStartY = Math.floor(y / 100) * 100;
+  const boxEndX = boxStartX + 100;
+  const boxEndY = boxStartY + 100;
+
+  const curToStartX = Math.abs(curX - boxStartX);
+  const curToEndX = Math.abs(curX - boxEndX);
+
+  const curToStartY = Math.abs(curY - boxStartY);
+  const curToEndY = Math.abs(curY - boxEndY);
+
+  const orderArr = [{ id: 0, value: curToStartX }, { id: 1, value: curToEndX }, { id: 2, value: curToStartY }, { id: 3, value: curToEndY }];
+  const t = orderArr.sort((a, b) => a.value - b.value);
+  if (t[0].value !== t[1].value) {
+    if (t[0].id === 0) {
+      ctx.beginPath();
+      ctx.rect(boxStartX - 100, boxStartY, 100, 100)
+      ctx.strokeStyle = "red";
+      ctx.stroke();
+      ctx.closePath();
+    }
+    if (t[0].id === 1) {
+      ctx.beginPath();
+      ctx.rect(boxStartX + 100, boxStartY, 100, 100)
+      ctx.strokeStyle = "red";
+      ctx.stroke();
+      ctx.closePath();
+    }
+    if (t[0].id === 2) {
+      ctx.beginPath();
+      ctx.rect(boxStartX, boxStartY - 100, 100, 100)
+      ctx.strokeStyle = "red";
+      ctx.stroke();
+      ctx.closePath();
+    }
+    if (t[0].id === 3) {
+      ctx.beginPath();
+      ctx.rect(boxStartX, boxStartY + 100, 100, 100)
+      ctx.strokeStyle = "red";
+      ctx.stroke();
+      ctx.closePath();
+    }
+  }
 }

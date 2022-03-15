@@ -32,7 +32,6 @@ const Canvas: React.FC = () => {
   const {
     widthNum,
     heightNum,
-    cellSize
   } = gridSpec;
 
   const canvasWidth = widthNum + "px"
@@ -43,7 +42,7 @@ const Canvas: React.FC = () => {
     createMarble(location, ref)
   }, [canvasRef, location]);
 
-  // canvas drag & drop
+  // canvas drag & drop !! Need to be checked. It doesn't work properly.
   useEffect(() => {
     const ref: any = canvasRef.current;
     let prevMouseX: number;

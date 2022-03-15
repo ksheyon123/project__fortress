@@ -21,36 +21,36 @@ position: fixed;
 
 const Controller: React.FC = () => {
   const setUnit = useSetRecoilState(unitLocationState);
+  const step = 10;
 
   const handleUnitLocation = useRecoilCallback(({ snapshot }) => async (code: string) => {
-
     const _location = await snapshot.getPromise(unitLocationState);
 
     if (code === "ArrowRight") {
       setUnit({
         ..._location,
-        x: _location.x + 10
+        x: _location.x + step
       })
     }
 
     if (code === "ArrowLeft") {
       setUnit({
         ..._location,
-        x: _location.x - 10
+        x: _location.x - step
       })
     }
 
     if (code === "ArrowUp") {
       setUnit({
         ..._location,
-        y: _location.y - 10
+        y: _location.y - step
       })
     }
 
     if (code === "ArrowDown") {
       setUnit({
         ..._location,
-        y: _location.y + 10
+        y: _location.y + step
       })
     }
   }, []);
