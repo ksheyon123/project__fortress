@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import {
   useRecoilState
 } from "recoil";
 import {
-  unitPositionState,
-  shootingDegreeState
+  unitLocationState,
+
 } from '../../state/atom';
 import {
-  fire
 } from "../../actions/actions";
 
 const StyledController = styled.div`
@@ -21,49 +20,50 @@ position: fixed;
 
 const Controller: React.FC = () => {
 
-  const [position, setPosition] = useRecoilState(unitPositionState);
-  const [degree, setDegree] = useRecoilState(shootingDegreeState);
+  const [location, setUnit] = useRecoilState(unitLocationState);
 
-  useEffect(() => {
-
-  }, []);
 
   const handleBackward = () => {
-    setPosition({
-      ...position,
-      isForward: false,
-      x: position.x - 10
+    setUnit({
+      ...location,
+      x: location.x - 10
     })
-  }
+  };
 
   const handleForward = () => {
-    setPosition({
-      ...position,
-      isForward: true,
-      x: position.x + 10
+    console.log(location.x);
+    setUnit({
+      ...location,
+      x: location.x + 10
     })
   }
 
-  const handleOnFire = () => {
-    fire(degree, position);
-  }
+  useEffect(() => {
+    window.addEventListener("keydown", (e: KeyboardEvent) => {
+      const {
+        code
+      } = e;
+      // code : ArrowLeft, ArrowRight, ArrowUp, ArrowDown
+      console.log(code);
+      if (code === 'ArrowRight') {
+        handleForward();
+      }
+      if (code === 'ArrowLeft') {
+        handleBackward();
+      }
+      if (code === 'ArrowUp') {
 
-  const handleUp = () => {
-    const _degree = degree + 1;
-    setDegree(_degree);
-  }
-  const handleDown = () => {
-    const _degree = degree - 1;
-    setDegree(_degree);
-  }
+      }
+      if (code === 'ArrowDown') {
+
+      }
+    })
+  }, []);
 
   return (
     <StyledController>
-      <button onClick={() => handleOnFire()}>Fire!</button>
-      <button onClick={() => handleUp()}>Up</button>
-      <button onClick={() => handleDown()}>Down</button>
-      <button onClick={() => handleBackward()}>Backword</button>
-      <button onClick={() => handleForward()}>Forward</button>
+
+
     </StyledController>
   )
 }

@@ -5,7 +5,7 @@ import {
   useRecoilState
 } from 'recoil';
 import {
-  unitPositionState, windVelocityState,
+  unitLocationState,
 } from "../../state/atom";
 import {
   createMarble,
@@ -24,7 +24,9 @@ const Canvas: React.FC = () => {
   const [canvasX, setCanvasX] = useState<number>(0);
   const [canvasY, setCanvasY] = useState<number>(0);
 
-  const position = useRecoilValue(unitPositionState);
+  const location = useRecoilValue(unitLocationState);
+
+  console.log(location);
 
   const widthNum = 4000;
   const heightNum = 4000;
@@ -33,12 +35,6 @@ const Canvas: React.FC = () => {
 
   const canvasWidth = widthNum + "px"
   const canvasHeight = heightNum + "px";
-
-  useEffect(() => {
-    setInterval(() => {
-      // setWindVelocity(-50)
-    }, 5000);
-  }, []);
 
   // 격자 무늬 그리기
   useEffect(() => {
@@ -57,19 +53,29 @@ const Canvas: React.FC = () => {
     ctx.stroke();
   }, [canvasRef]);
 
-  // 격자에 Object 배치하기
-
-  // player Positioning
+  // Set Unit Position;
   useEffect(() => {
+    // setUnit({
+    //   lookingDirection: 0,
+    //   x: 50,
+    //   y: 50
+    // })
+  }, []);
+
+  // Draw Unit
+  useEffect(() => {
+    const {
+      x, y
+    } = location;
     const ref: any = canvasRef.current;
     const ctx = ref.getContext("2d");
     const r = 10;
     ctx.beginPath();
-    ctx.arc(50, 50, r, 0, Math.PI * 2, true);
+    ctx.arc(x, y, r, 0, Math.PI * 2, true);
     ctx.fillStyle = 'blue';
     ctx.fill();
     ctx.closePath();
-  }, [canvasRef]);
+  }, [canvasRef, location]);
 
   // canvas drag & drop
   useEffect(() => {

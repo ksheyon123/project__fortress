@@ -1,32 +1,27 @@
 import { atom } from "recoil";
 
+enum Direction {
+  Right = 0,
+  Left = 1,
+  Up = 2,
+  Down = 3
+}
+
 type PositionProps = {
-  isForward: boolean;
+  lookingDirection: Direction;
   x: number;
   y: number;
 }
 
-const unitPositionState = atom<PositionProps>({
-  key: "unitPositionState",
+const unitLocationState = atom<PositionProps>({
+  key: "unitLocationState",
   default: {
-    isForward: true,
-    x: 100,
-    y: 240,
+    lookingDirection: 0,
+    x: 0,
+    y: 0,
   },
 });
 
-const windVelocityState = atom<number>({
-  key: "windVelocityState",
-  default: 0
-});
-
-const shootingDegreeState = atom<number>({
-  key: "shootingDegreeState",
-  default: 45
-})
-
 export {
-  unitPositionState,
-  windVelocityState,
-  shootingDegreeState
+  unitLocationState,
 }
