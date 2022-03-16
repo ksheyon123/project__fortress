@@ -2,10 +2,12 @@ import React from 'react';
 import styled from "styled-components";
 
 import {
-  Pallet
-} from "./Pallet";
+  Pallet,
+  Brush
+} from "./index";
 
 const StyledToolTab = styled.div`
+  display : flex;
   width : 100%;
   height : 60px;
   padding: 0px 10px;
@@ -17,6 +19,7 @@ const ToolTab: React.FC = () => {
   return (
     <StyledToolTab>
       <Pallet />
+      <Brush />
     </StyledToolTab>
   )
 }

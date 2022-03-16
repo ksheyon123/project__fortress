@@ -8,7 +8,7 @@ import {
   hexToRgbConverter
 } from "../../utils/index";
 import {
-  objectColorState
+  canvasColorState
 } from "../../state/atom";
 import ic_switch from "../../assets/ic_switch.png";
 
@@ -65,7 +65,7 @@ const StyledPallet = styled.div<StyledProps>`
 const Pallet: React.FC = (props) => {
   const [showPallet, setShowPallet] = useState<boolean>(false);
   const [isHex, setIsHex] = useState<boolean>(false);
-  const [color, setColor] = useRecoilState(objectColorState);
+  const [color, setColor] = useRecoilState(canvasColorState);
   const [rgb1, setRgb1] = useState<string>("255");
   const [rgb2, setRgb2] = useState<string>("255");
   const [rgb3, setRgb3] = useState<string>("255");

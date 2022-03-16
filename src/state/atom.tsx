@@ -22,12 +22,18 @@ const unitLocationState = atom<PositionProps>({
   },
 });
 
-const objectColorState = atom<string>({
-  key: "objectColorState",
+const canvasColorState = atom<string>({
+  key: "canvasColorState",
   default: "#FFFFFF",
+});
+
+const canvasBrushThicknessState = atom<string>({
+  key: "canvasBrushThicknessState",
+  default: "1px",
 })
 
 export {
   unitLocationState,
-  objectColorState
+  canvasColorState,
+  canvasBrushThicknessState
 }
