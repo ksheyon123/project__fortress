@@ -6,7 +6,7 @@ import styled from "styled-components";
 import {
   Canvas,
   Controller
-} from "../components/common/index";
+} from "../components/ingame/index";
 const StyledContainer = styled.div`
 display: block;
   width : 100vw;
