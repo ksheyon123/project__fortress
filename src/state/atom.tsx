@@ -22,6 +22,12 @@ const unitLocationState = atom<PositionProps>({
   },
 });
 
+const objectColorState = atom<string>({
+  key: "objectColorState",
+  default: "#FFFFFF",
+})
+
 export {
   unitLocationState,
+  objectColorState
 }

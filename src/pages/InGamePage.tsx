@@ -4,7 +4,7 @@ import {
 } from "recoil";
 import styled from "styled-components";
 import {
-  Canvas,
+  View,
   Controller
 } from "../components/ingame/index";
 const StyledContainer = styled.div`
@@ -16,11 +16,9 @@ display: block;
 
 const InGamePage: React.FC = () => {
 
-
-
   return (
     <StyledContainer>
-      <Canvas />
+      <View />
       <Controller />
     </StyledContainer>
   )

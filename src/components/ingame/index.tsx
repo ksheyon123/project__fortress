@@ -1,2 +1,2 @@
-export { Canvas } from "./Canvas";
+export { View } from "./View";
 export { Controller } from "./Controller";

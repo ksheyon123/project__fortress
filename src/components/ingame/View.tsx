@@ -21,7 +21,7 @@ const StyledCanvasWrapper = styled.div`
   height : calc(100vh - 150px);
 `;
 
-const Canvas: React.FC = () => {
+const View: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>();
 
   const [canvasX, setCanvasX] = useState<number>(0);
@@ -95,4 +95,4 @@ const Canvas: React.FC = () => {
   )
 }
 
-export { Canvas }
+export { View }

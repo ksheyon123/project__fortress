@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  ToolTab
+  ToolTab,
+  Canvas
 } from "../components/creator/index";
 
 const StyledContainer = styled.div`
@@ -14,6 +15,7 @@ const CreateNFTPage: React.FC = () => {
     <>
       <StyledContainer>
         <ToolTab />
+        <Canvas />
       </StyledContainer>
     </>
   )
