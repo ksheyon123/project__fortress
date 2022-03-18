@@ -1,7 +1,8 @@
 export const gridSpec = {
-  widthNum: 4000,
-  heightNum: 4000,
-  cellSize: 100,
+  widthNum: 1000,
+  heightNum: 1000,
+  cellSize: 50,
+  step: 5,
 }
 
 export const player = [

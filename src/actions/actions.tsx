@@ -43,13 +43,20 @@ export const createMarble = (position: any, canvas: any) => {
 }
 
 const unitBorder = (position: any) => {
-  let startX = Math.floor(position.x / 100) * 100;
-  let startY = Math.floor(position.y / 100) * 100;
+  let startX = Math.floor(position.x / cellSize) * cellSize;
+  let startY = Math.floor(position.y / cellSize) * cellSize;
   ctx.beginPath();
-  ctx.rect(startX, startY, 100, 100)
+  ctx.rect(startX, startY, cellSize, cellSize)
   ctx.strokeStyle = "#323232";
   ctx.stroke();
   ctx.closePath();
+}
+
+const collisionCheck = (coordinate: any) => {
+
+  let distance = 5;
+
+
 }
 
 const interactionArea = (position: any) => {
@@ -62,10 +69,10 @@ const interactionArea = (position: any) => {
   const curX = x;
   const curY = y;
 
-  const boxStartX = Math.floor(x / 100) * 100;
-  const boxStartY = Math.floor(y / 100) * 100;
-  const boxEndX = boxStartX + 100;
-  const boxEndY = boxStartY + 100;
+  const boxStartX = Math.floor(x / cellSize) * cellSize;
+  const boxStartY = Math.floor(y / cellSize) * cellSize;
+  const boxEndX = boxStartX + cellSize;
+  const boxEndY = boxStartY + cellSize;
 
   const curToStartX = Math.abs(curX - boxStartX);
   const curToEndX = Math.abs(curX - boxEndX);
@@ -78,28 +85,28 @@ const interactionArea = (position: any) => {
   if (t[0].value !== t[1].value) {
     if (t[0].id === 0) {
       ctx.beginPath();
-      ctx.rect(boxStartX - 100, boxStartY, 100, 100)
+      ctx.rect(boxStartX - cellSize, boxStartY, cellSize, cellSize)
       ctx.strokeStyle = "red";
       ctx.stroke();
       ctx.closePath();
     }
     if (t[0].id === 1) {
       ctx.beginPath();
-      ctx.rect(boxStartX + 100, boxStartY, 100, 100)
+      ctx.rect(boxStartX + cellSize, boxStartY, cellSize, cellSize)
       ctx.strokeStyle = "red";
       ctx.stroke();
       ctx.closePath();
     }
     if (t[0].id === 2) {
       ctx.beginPath();
-      ctx.rect(boxStartX, boxStartY - 100, 100, 100)
+      ctx.rect(boxStartX, boxStartY - cellSize, cellSize, cellSize)
       ctx.strokeStyle = "red";
       ctx.stroke();
       ctx.closePath();
     }
     if (t[0].id === 3) {
       ctx.beginPath();
-      ctx.rect(boxStartX, boxStartY + 100, 100, 100)
+      ctx.rect(boxStartX, boxStartY + cellSize, cellSize, cellSize)
       ctx.strokeStyle = "red";
       ctx.stroke();
       ctx.closePath();

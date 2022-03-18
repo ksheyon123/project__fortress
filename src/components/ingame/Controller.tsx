@@ -10,6 +10,9 @@ import {
 } from '../../state/atom';
 import {
 } from "../../actions/actions";
+import {
+  gridSpec
+} from "../../constants/field";
 
 const StyledController = styled.div`
 position: fixed;
@@ -21,7 +24,9 @@ position: fixed;
 
 const Controller: React.FC = () => {
   const setUnit = useSetRecoilState(unitLocationState);
-  const step = 10;
+  const {
+    step
+  } = gridSpec;
 
   const handleUnitLocation = useRecoilCallback(({ snapshot }) => async (code: string) => {
     const _location = await snapshot.getPromise(unitLocationState);

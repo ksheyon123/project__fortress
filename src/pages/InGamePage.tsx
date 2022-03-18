@@ -5,10 +5,11 @@ import {
 import styled from "styled-components";
 import {
   View,
-  Controller
+  Controller,
+  ActionMenu
 } from "../components/ingame/index";
 const StyledContainer = styled.div`
-display: block;
+  display: block;
   width : 100vw;
   height : 100vh;
   background-color : #EFEFEF;
@@ -18,6 +19,7 @@ const InGamePage: React.FC = () => {
 
   return (
     <StyledContainer>
+      <ActionMenu />
       <View />
       <Controller />
     </StyledContainer>

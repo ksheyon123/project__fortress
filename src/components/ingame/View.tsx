@@ -16,7 +16,6 @@ import {
 } from "../../actions/actions";
 
 const StyledCanvasWrapper = styled.div`
-  overflow : hidden;
   width : 100vw;
   height : calc(100vh - 150px);
 `;
