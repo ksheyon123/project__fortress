@@ -1,11 +1,19 @@
-import { gridSpec } from "../constants/field";
-
+import { gridSpec, e1, e2 } from "../constants/field";
 let ctx: any;
 const {
   widthNum,
   heightNum,
   cellSize
 } = gridSpec;
+
+const draw = (x: number, y: number) => {
+  const r = 10;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2, true);
+  ctx.fillStyle = 'blue';
+  ctx.fill();
+  ctx.closePath();
+}
 
 export const createGridTemplate = () => {
   for (var x = 0; x < widthNum; x += cellSize) {
@@ -40,6 +48,10 @@ export const createMarble = (position: any, canvas: any) => {
 
   // 상호작용 영역
   interactionArea(position);
+
+  // 적 만들기
+  draw(e1.x, e1.y);
+  draw(e2.x, e2.y);
 }
 
 const unitBorder = (position: any) => {
@@ -112,4 +124,20 @@ const interactionArea = (position: any) => {
       ctx.closePath();
     }
   }
+  distance({ x, y });
+}
+
+const distance = ({ x, y }: { x: number; y: number; }) => {
+  let distance: number = 50;
+
+  const isClose = Math.sqrt(Math.pow((x - e1.x), 2) + Math.pow((y - e1.y), 2)) < distance;
+  console.log(isClose);
+  if (isClose) {
+    ctx.beginPath();
+    ctx.arc(e1.x, e1.y, 20, 0, Math.PI * 2, true);
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.closePath();
+  }
+
 }

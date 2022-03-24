@@ -1,42 +1,18 @@
 export const gridSpec = {
-  widthNum: 1000,
-  heightNum: 1000,
+  widthNum: 4000,
+  heightNum: 4000,
   cellSize: 50,
   step: 5,
 }
 
-export const player = [
-
-]
-
-export const meat = {
-
+export const e1 = {
+  x: 80,
+  y: 240,
+  color: "blue"
 }
 
-export const wood = {
-
-}
-
-export const wall = {
-
-}
-
-export const animal = {
-
-}
-
-export const mud = {
-
-}
-
-export const copper = {
-
-}
-
-export const water = {
-
-}
-
-export const pond = {
-
+export const e2 = {
+  x: 310,
+  y: 120,
+  color: "blue"
 }

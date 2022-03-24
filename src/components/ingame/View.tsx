@@ -18,6 +18,7 @@ import {
 const StyledCanvasWrapper = styled.div`
   width : 100vw;
   height : calc(100vh - 150px);
+  overflow: hidden;
 `;
 
 const View: React.FC = () => {

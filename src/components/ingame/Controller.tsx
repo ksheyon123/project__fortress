@@ -65,6 +65,9 @@ const Controller: React.FC = () => {
       const {
         code
       } = e;
+
+      console.log(code);
+
       // code : ArrowLeft, ArrowRight, ArrowUp, ArrowDown
       handleUnitLocation(code);
     })
