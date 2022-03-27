@@ -8,11 +8,13 @@ import {
   unitLocationState,
 } from "../../state/atom";
 import {
-  gridSpec
+  gridSpec,
+  e1
 } from "../../constants/field";
 import {
   createGridTemplate,
   createMarble,
+  createEnemy
 } from "../../actions/actions";
 
 const StyledCanvasWrapper = styled.div`
@@ -42,6 +44,13 @@ const View: React.FC = () => {
     createMarble(location, ref)
   }, [canvasRef, location]);
 
+
+  const [x, setEnemyX] = useState<number>(e1.x);
+  const [y, setEnemyY] = useState<number>(e1.y);
+
+  useEffect(() => {
+    createEnemy(x, y);
+  }, [x, y]);
   // canvas drag & drop !! Need to be checked. It doesn't work properly.
   useEffect(() => {
     const ref: any = canvasRef.current;
