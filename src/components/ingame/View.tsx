@@ -16,6 +16,9 @@ import {
   createMarble,
   createEnemy
 } from "../../actions/actions";
+import {
+  createMable
+} from "../../hooks/useCanvas";
 
 const StyledCanvasWrapper = styled.div`
   width : 100vw;
@@ -41,8 +44,8 @@ const View: React.FC = () => {
   // Draw Unit
   useEffect(() => {
     const ref: any = canvasRef.current;
-    createMarble(location, ref)
-  }, [canvasRef, location]);
+    createMable(location, ref)
+  }, [location]);
 
 
   const [x, setEnemyX] = useState<number>(e1.x);
