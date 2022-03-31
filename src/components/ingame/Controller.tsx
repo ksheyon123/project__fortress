@@ -6,7 +6,7 @@ import {
   useRecoilCallback
 } from "recoil";
 import {
-  unitLocationState,
+  unitCoordinateState,
 } from '../../state/atom';
 import {
   useCanvas
@@ -24,49 +24,48 @@ position: fixed;
 `;
 
 const Controller: React.FC = () => {
-  const { setCoordinate, collision } = useCanvas();
+  const { coordinate, setCoordinate, collision } = useCanvas();
 
   const {
     step
   } = gridSpec;
 
-  const handleUnitLocation = useRecoilCallback(({ snapshot }) => async (code: string) => {
-    const _location = await snapshot.getPromise(unitLocationState);
+  const handleUnitLocation = async (code: string) => {
 
-    collision();
+    console.log(code);
 
     if (code === "ArrowRight") {
       setCoordinate({
-        ..._location,
+        ...coordinate,
         lookingDirection: 0,
-        x: _location.x + step
+        x: coordinate.x + step
       })
     }
 
     if (code === "ArrowLeft") {
       setCoordinate({
-        ..._location,
+        ...coordinate,
         lookingDirection: 1,
-        x: _location.x - step
+        x: coordinate.x - step
       })
     }
 
     if (code === "ArrowUp") {
       setCoordinate({
-        ..._location,
+        ...coordinate,
         lookingDirection: 2,
-        y: _location.y - step
+        y: coordinate.y - step
       })
     }
 
     if (code === "ArrowDown") {
       setCoordinate({
-        ..._location,
+        ...coordinate,
         lookingDirection: 3,
-        y: _location.y + step
+        y: coordinate.y + step
       })
     }
-  }, []);
+  };
 
   useEffect(() => {
     window.addEventListener("keydown", (e: KeyboardEvent) => {

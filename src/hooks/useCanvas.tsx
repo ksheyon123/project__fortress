@@ -1,6 +1,6 @@
 import { useRecoilValue, useSetRecoilState, useRecoilState, useRecoilCallback } from "recoil";
 import {
-  unitLocationState
+  unitCoordinateState
 } from "../state/atom";
 import {
   gridSpec
@@ -16,7 +16,9 @@ const {
 
 
 export function useCanvas() {
-  const [coordinate, setCoordinate] = useRecoilState(unitLocationState);
+  const [coordinate, setCoordinate] = useRecoilState(unitCoordinateState);
+
+  console.log(coordinate);
 
   const enemy = {
     x: 120,
@@ -84,6 +86,7 @@ export function useCanvas() {
 
   return {
     setCoordinate,
+    coordinate,
     collision,
     draw
   }

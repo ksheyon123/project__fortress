@@ -5,7 +5,7 @@ import {
 
 } from 'recoil';
 import {
-  unitLocationState,
+  unitCoordinateState,
 } from "../../state/atom";
 import {
   gridSpec,
@@ -31,7 +31,7 @@ const View: React.FC = () => {
   const [canvasX, setCanvasX] = useState<number>(0);
   const [canvasY, setCanvasY] = useState<number>(0);
 
-  const location = useRecoilValue(unitLocationState);
+  const location = useRecoilValue(unitCoordinateState);
 
   const { draw } = useCanvas();
 
@@ -44,9 +44,10 @@ const View: React.FC = () => {
   const canvasHeight = heightNum + "px";
   // Draw Unit
   useEffect(() => {
-    const ref: any = canvasRef.current;
+    const ref: HTMLCanvasElement = canvasRef.current!;
+
     draw(ref)
-  }, [canvasRef, location]);
+  }, [canvasRef]);
 
 
   const [x, setEnemyX] = useState<number>(e1.x);
