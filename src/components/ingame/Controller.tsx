@@ -9,8 +9,8 @@ import {
   unitCoordinateState,
 } from '../../state/atom';
 import {
-  useCanvas
-} from "../../hooks/useCanvas";
+  useCollisionCheck
+} from "../../hooks/useCollisionCheck";
 import {
   gridSpec
 } from "../../constants/field";
@@ -24,48 +24,49 @@ position: fixed;
 `;
 
 const Controller: React.FC = () => {
-  const { coordinate, setCoordinate, collision } = useCanvas();
-
+  const setCoordinate = useSetRecoilState(unitCoordinateState);
+  const { getContact } = useCollisionCheck();
   const {
     step
   } = gridSpec;
 
-  const handleUnitLocation = async (code: string) => {
-
-    console.log(code);
-
+  const handleUnitLocation = useRecoilCallback(({ snapshot }) => async (code: string) => {
+    const _coordinate = await snapshot.getPromise(unitCoordinateState);
+    if (await getContact()) {
+      return;
+    }
     if (code === "ArrowRight") {
       setCoordinate({
-        ...coordinate,
+        ..._coordinate,
         lookingDirection: 0,
-        x: coordinate.x + step
+        x: _coordinate.x + step
       })
     }
 
     if (code === "ArrowLeft") {
       setCoordinate({
-        ...coordinate,
+        ..._coordinate,
         lookingDirection: 1,
-        x: coordinate.x - step
+        x: _coordinate.x - step
       })
     }
 
     if (code === "ArrowUp") {
       setCoordinate({
-        ...coordinate,
+        ..._coordinate,
         lookingDirection: 2,
-        y: coordinate.y - step
+        y: _coordinate.y - step
       })
     }
 
     if (code === "ArrowDown") {
       setCoordinate({
-        ...coordinate,
+        ..._coordinate,
         lookingDirection: 3,
-        y: coordinate.y + step
+        y: _coordinate.y + step
       })
     }
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", (e: KeyboardEvent) => {

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, RefObject, useState, MouseEvent } from "react
 import styled from "styled-components";
 import {
   useRecoilValue,
-
 } from 'recoil';
 import {
   unitCoordinateState,
@@ -13,11 +12,10 @@ import {
 } from "../../constants/field";
 import {
   createGridTemplate,
-  createEnemy
 } from "../../actions/actions";
 import {
-  useCanvas
-} from "../../hooks/useCanvas";
+  useCreateObject
+} from "../../hooks/useCreateObject";
 
 const StyledCanvasWrapper = styled.div`
   width : 100vw;
@@ -30,10 +28,8 @@ const View: React.FC = () => {
 
   const [canvasX, setCanvasX] = useState<number>(0);
   const [canvasY, setCanvasY] = useState<number>(0);
-
-  const location = useRecoilValue(unitCoordinateState);
-
-  const { draw } = useCanvas();
+  const coordinate = useRecoilValue(unitCoordinateState);
+  const { draw } = useCreateObject();
 
   const {
     widthNum,
@@ -44,14 +40,9 @@ const View: React.FC = () => {
   const canvasHeight = heightNum + "px";
   // Draw Unit
   useEffect(() => {
-    const ref: HTMLCanvasElement = canvasRef.current!;
-
-    draw(ref)
-  }, [canvasRef]);
-
-
-  const [x, setEnemyX] = useState<number>(e1.x);
-  const [y, setEnemyY] = useState<number>(e1.y);
+    const canvas: HTMLCanvasElement = canvasRef.current!;
+    draw(canvas)
+  }, [canvasRef, coordinate]);
 
   // useEffect(() => {
   //   createEnemy(x, y);

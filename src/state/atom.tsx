@@ -1,18 +1,5 @@
 import { atom } from "recoil";
-
-enum Direction {
-  Right = 0,
-  Left = 1,
-  Up = 2,
-  Down = 3
-}
-
-type PositionProps = {
-  lookingDirection: Direction;
-  x: number;
-  y: number;
-}
-
+import { PositionProps } from "../constants/types";
 // 0 right, 1 left, 2 up, 3 bottom
 const unitCoordinateState = atom<PositionProps>({
   key: "unitCoordinateState",
