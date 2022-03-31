@@ -32,40 +32,44 @@ const Controller: React.FC = () => {
 
   const handleUnitLocation = useRecoilCallback(({ snapshot }) => async (code: string) => {
     const _coordinate = await snapshot.getPromise(unitCoordinateState);
-    if (await getContact()) {
-      return;
-    }
+    let updatedCoordinate = _coordinate;
     if (code === "ArrowRight") {
-      setCoordinate({
+      updatedCoordinate = {
         ..._coordinate,
         lookingDirection: 0,
         x: _coordinate.x + step
-      })
+      }
     }
 
     if (code === "ArrowLeft") {
-      setCoordinate({
+      updatedCoordinate = {
         ..._coordinate,
         lookingDirection: 1,
         x: _coordinate.x - step
-      })
+      }
     }
 
     if (code === "ArrowUp") {
-      setCoordinate({
+      updatedCoordinate = {
         ..._coordinate,
         lookingDirection: 2,
         y: _coordinate.y - step
-      })
+      }
     }
 
     if (code === "ArrowDown") {
-      setCoordinate({
+      updatedCoordinate = {
         ..._coordinate,
         lookingDirection: 3,
         y: _coordinate.y + step
-      })
+      }
     }
+    const hasCollision = await getContact(updatedCoordinate);
+    if (hasCollision) {
+      return;
+    }
+    setCoordinate(updatedCoordinate)
+
   }, []);
 
   useEffect(() => {

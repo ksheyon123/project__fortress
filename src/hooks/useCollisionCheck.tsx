@@ -7,23 +7,15 @@ import {
 } from "../constants/types"
 export const useCollisionCheck = () => {
 
-  const getContact = useRecoilCallback(({ snapshot }) => async () => {
-
-    const _coordinate = await snapshot.getPromise(unitCoordinateState);
-    console.log(_coordinate);
-    return collision(_coordinate);
-  }, []);
-
-  const collision = (props: PositionProps) => {
-    // 전진
+  const getContact = useRecoilCallback(({ snapshot }) => async (willUpdateCoordinate: PositionProps) => {
     const {
       lookingDirection,
       x,
       y
-    } = props;
+    } = willUpdateCoordinate;
     const ex = 50;
     const ey = 100;
-    const r = 10;
+    const r = 10 / 2;
     if (lookingDirection === 0) {
       return (x + 5) === (ex - r);
     }
@@ -39,7 +31,7 @@ export const useCollisionCheck = () => {
     if (lookingDirection === 2) {
       return (y - 5) === (ey + r);
     }
-  }
+  }, []);
 
   return {
     getContact

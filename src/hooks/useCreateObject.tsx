@@ -24,39 +24,14 @@ export const useCreateObject = () => {
   const draw = (canvas: HTMLCanvasElement) => {
     ctx = canvas.getContext("2d")!;
     ctx.clearRect(0, 0, canvas.width, canvas.width);
-    const r = 10;
+    const r = 20;
     ctx.beginPath();
-    ctx.arc(x, y, r, 0, Math.PI * 2, true);
+    ctx.rect(x, y, r, r);
     ctx.fillStyle = 'blue';
     ctx.fill();
     ctx.closePath();
     createGridTemplate();
   }
-
-  // const collision = () => {
-  //   const {
-  //     x,
-  //     y,
-  //     lookingDirection
-  //   } = coordinate;
-  //   console.log("lookingDirection", lookingDirection, "x ", x);
-  //   // 전진
-  //   if (lookingDirection === 0) {
-  //     return (x + 5) === (enemy.x - 5);
-  //   }
-
-  //   if (lookingDirection === 1) {
-  //     return (x - 5) === (enemy.x + 5);
-  //   }
-  //   // 아래로
-  //   if (lookingDirection === 3) {
-  //     return (y + 5) === (enemy.y - 5);
-  //   }
-
-  //   if (lookingDirection === 2) {
-  //     return (y - 5) === (enemy.y + 5);
-  //   }
-  // }
 
   return {
     draw
