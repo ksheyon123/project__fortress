@@ -13,11 +13,10 @@ import {
 } from "../../constants/field";
 import {
   createGridTemplate,
-  createMarble,
   createEnemy
 } from "../../actions/actions";
 import {
-  createMable
+  useCanvas
 } from "../../hooks/useCanvas";
 
 const StyledCanvasWrapper = styled.div`
@@ -34,6 +33,8 @@ const View: React.FC = () => {
 
   const location = useRecoilValue(unitLocationState);
 
+  const { draw } = useCanvas();
+
   const {
     widthNum,
     heightNum,
@@ -44,16 +45,16 @@ const View: React.FC = () => {
   // Draw Unit
   useEffect(() => {
     const ref: any = canvasRef.current;
-    createMable(location, ref)
-  }, [location]);
+    draw(ref)
+  }, [canvasRef, location]);
 
 
   const [x, setEnemyX] = useState<number>(e1.x);
   const [y, setEnemyY] = useState<number>(e1.y);
 
-  useEffect(() => {
-    createEnemy(x, y);
-  }, [x, y]);
+  // useEffect(() => {
+  //   createEnemy(x, y);
+  // }, [x, y]);
   // canvas drag & drop !! Need to be checked. It doesn't work properly.
   useEffect(() => {
     const ref: any = canvasRef.current;

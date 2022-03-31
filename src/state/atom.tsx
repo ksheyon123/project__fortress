@@ -13,6 +13,7 @@ type PositionProps = {
   y: number;
 }
 
+// 0 right, 1 left, 2 up, 3 bottom
 const unitLocationState = atom<PositionProps>({
   key: "unitLocationState",
   default: {

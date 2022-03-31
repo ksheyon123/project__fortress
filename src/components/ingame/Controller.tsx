@@ -9,7 +9,8 @@ import {
   unitLocationState,
 } from '../../state/atom';
 import {
-} from "../../actions/actions";
+  useCanvas
+} from "../../hooks/useCanvas";
 import {
   gridSpec
 } from "../../constants/field";
@@ -23,7 +24,8 @@ position: fixed;
 `;
 
 const Controller: React.FC = () => {
-  const setUnit = useSetRecoilState(unitLocationState);
+  const { setCoordinate, collision } = useCanvas();
+
   const {
     step
   } = gridSpec;
@@ -31,30 +33,36 @@ const Controller: React.FC = () => {
   const handleUnitLocation = useRecoilCallback(({ snapshot }) => async (code: string) => {
     const _location = await snapshot.getPromise(unitLocationState);
 
+    collision();
+
     if (code === "ArrowRight") {
-      setUnit({
+      setCoordinate({
         ..._location,
+        lookingDirection: 0,
         x: _location.x + step
       })
     }
 
     if (code === "ArrowLeft") {
-      setUnit({
+      setCoordinate({
         ..._location,
+        lookingDirection: 1,
         x: _location.x - step
       })
     }
 
     if (code === "ArrowUp") {
-      setUnit({
+      setCoordinate({
         ..._location,
+        lookingDirection: 2,
         y: _location.y - step
       })
     }
 
     if (code === "ArrowDown") {
-      setUnit({
+      setCoordinate({
         ..._location,
+        lookingDirection: 3,
         y: _location.y + step
       })
     }
@@ -65,8 +73,6 @@ const Controller: React.FC = () => {
       const {
         code
       } = e;
-
-      console.log(code);
 
       // code : ArrowLeft, ArrowRight, ArrowUp, ArrowDown
       handleUnitLocation(code);

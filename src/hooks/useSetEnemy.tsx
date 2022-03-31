@@ -2,6 +2,10 @@ import { useEffect } from "react";
 
 export const useSetEnemy = () => {
 
+  const draw = () => {
+
+  }
+
   useEffect(() => {
     setInterval(() => {
 
