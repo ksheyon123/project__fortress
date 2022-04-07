@@ -30,10 +30,10 @@ const Controller: React.FC = () => {
     step
   } = gridSpec;
 
-  const handleUnitLocation = useRecoilCallback(({ snapshot }) => async (code: string) => {
+  const handleUnitLocation = useRecoilCallback(({ snapshot }) => async (direction: number) => {
     const _coordinate = await snapshot.getPromise(unitCoordinateState);
     let updatedCoordinate = _coordinate;
-    if (code === "ArrowRight") {
+    if (direction === 0) {
       updatedCoordinate = {
         ..._coordinate,
         lookingDirection: 0,
@@ -41,46 +41,22 @@ const Controller: React.FC = () => {
       }
     }
 
-    if (code === "ArrowLeft") {
+    if (direction === 1) {
       updatedCoordinate = {
         ..._coordinate,
         lookingDirection: 1,
         x: _coordinate.x - step
       }
     }
-
-    if (code === "ArrowUp") {
-      updatedCoordinate = {
-        ..._coordinate,
-        lookingDirection: 2,
-        y: _coordinate.y - step
-      }
-    }
-
-    if (code === "ArrowDown") {
-      updatedCoordinate = {
-        ..._coordinate,
-        lookingDirection: 3,
-        y: _coordinate.y + step
-      }
-    }
-    const hasCollision = await getContact(updatedCoordinate);
-    if (hasCollision) {
-      return;
-    }
     setCoordinate(updatedCoordinate)
 
   }, []);
 
   useEffect(() => {
-    window.addEventListener("keydown", (e: KeyboardEvent) => {
-      const {
-        code
-      } = e;
-
-      // code : ArrowLeft, ArrowRight, ArrowUp, ArrowDown
-      handleUnitLocation(code);
-    })
+    setInterval(() => {
+      const rnd = Math.floor(Math.random() * 2);
+      handleUnitLocation(rnd)
+    }, 1500);
   }, []);
 
   return (

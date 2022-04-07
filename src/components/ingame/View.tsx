@@ -28,14 +28,8 @@ const View: React.FC = () => {
   const [canvasX, setCanvasX] = useState<number>(0);
   const [canvasY, setCanvasY] = useState<number>(0);
   const coordinate = useRecoilValue(unitCoordinateState);
+  console.log(coordinate)
   const { draw } = useCreateObject();
-
-  const {
-    widthNum,
-    heightNum,
-  } = gridSpec;
-
-
 
   // Draw Unit
   useEffect(() => {

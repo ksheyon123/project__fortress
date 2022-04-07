@@ -28,7 +28,7 @@ export const useCreateObject = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.width);
     const r = 20;
     ctx.beginPath();
-    ctx.rect(x, y + window.innerHeight - 170 - r, r, r);
+    ctx.rect(window.innerWidth / 2 - x, y + window.innerHeight - 170 - r, r, r);
     ctx.fillStyle = theme.pixel;
     ctx.fill();
     ctx.closePath();
