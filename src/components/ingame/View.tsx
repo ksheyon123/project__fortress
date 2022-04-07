@@ -8,18 +8,17 @@ import {
 } from "../../state/atom";
 import {
   gridSpec,
-  e1
 } from "../../constants/field";
-import {
-  createGridTemplate,
-} from "../../actions/actions";
 import {
   useCreateObject
 } from "../../hooks/useCreateObject";
+import { theme } from "../../styles/theme";
 
 const StyledCanvasWrapper = styled.div`
+display: flex;
+justify-content: center;
   width : 100vw;
-  height : calc(100vh - 150px);
+  height : calc(100vh - 172px);
   overflow: hidden;
 `;
 
@@ -36,8 +35,8 @@ const View: React.FC = () => {
     heightNum,
   } = gridSpec;
 
-  const canvasWidth = widthNum + "px"
-  const canvasHeight = heightNum + "px";
+
+
   // Draw Unit
   useEffect(() => {
     const canvas: HTMLCanvasElement = canvasRef.current!;
@@ -84,15 +83,9 @@ const View: React.FC = () => {
       <canvas
         ref={canvasRef as RefObject<HTMLCanvasElement>}
         id="game-screen"
-        width={canvasWidth}
-        height={canvasHeight}
         style={{
-          backgroundColor: "#FFF",
-          border: "3px solid #323232",
-          marginBottom: 150,
-          position: "relative",
-          top: canvasY,
-          left: canvasX
+          backgroundColor: theme.background,
+          aspectRatio: "unset"
         }}>
       </canvas>
     </StyledCanvasWrapper>

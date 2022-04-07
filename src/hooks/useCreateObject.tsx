@@ -5,7 +5,7 @@ import {
 import {
   gridSpec
 } from "../constants/field";
-
+import { theme } from "../styles/theme";
 let ctx: CanvasRenderingContext2D;
 
 const {
@@ -22,15 +22,17 @@ export const useCreateObject = () => {
   } = coordinate;
 
   const draw = (canvas: HTMLCanvasElement) => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight - 170;
     ctx = canvas.getContext("2d")!;
     ctx.clearRect(0, 0, canvas.width, canvas.width);
     const r = 20;
     ctx.beginPath();
-    ctx.rect(x, y, r, r);
-    ctx.fillStyle = 'blue';
+    ctx.rect(x, y + window.innerHeight - 170 - r, r, r);
+    ctx.fillStyle = theme.pixel;
     ctx.fill();
     ctx.closePath();
-    createGridTemplate();
+    // createGridTemplate();
   }
 
   return {
@@ -38,16 +40,16 @@ export const useCreateObject = () => {
   }
 }
 
-const createGridTemplate = () => {
-  for (var x = 0; x < widthNum; x += cellSize) {
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, heightNum);
-  }
+// const createGridTemplate = () => {
+//   for (var x = 0; x < widthNum; x += cellSize) {
+//     ctx.moveTo(x, 0);
+//     ctx.lineTo(x, heightNum);
+//   }
 
-  for (var y = 0; y < heightNum; y += cellSize) {
-    ctx.moveTo(0, y);
-    ctx.lineTo(widthNum, y);
-  }
-  ctx.strokeStyle = "#ddd";
-  ctx.stroke();
-}
+//   for (var y = 0; y < heightNum; y += cellSize) {
+//     ctx.moveTo(0, y);
+//     ctx.lineTo(widthNum, y);
+//   }
+//   ctx.strokeStyle = "#ddd";
+//   ctx.stroke();
+// }

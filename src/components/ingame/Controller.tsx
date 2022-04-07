@@ -14,13 +14,13 @@ import {
 import {
   gridSpec
 } from "../../constants/field";
+import { theme } from "../../styles/theme";
 
 const StyledController = styled.div`
-position: fixed;
-  bottom : 0;
   width : 100vw;
-  height : 150px;
-  background-color: snow;
+  height : 100px;
+  background-color: ${theme.background};
+  border-top: 1px solid ${theme.pixel};
 `;
 
 const Controller: React.FC = () => {
