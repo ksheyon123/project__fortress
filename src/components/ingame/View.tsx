@@ -28,14 +28,18 @@ const View: React.FC = () => {
   const [canvasX, setCanvasX] = useState<number>(0);
   const [canvasY, setCanvasY] = useState<number>(0);
   const coordinate = useRecoilValue(unitCoordinateState);
-  console.log(coordinate)
-  const { draw } = useCreateObject();
 
-  // Draw Unit
+  const { createObj } = useCreateObject();
+
+  // Draw Canvas
   useEffect(() => {
     const canvas: HTMLCanvasElement = canvasRef.current!;
-    draw(canvas)
-  }, [canvasRef, coordinate]);
+    canvas.style.width = window.innerWidth + "px";
+  }, [canvasRef]);
+
+  useEffect(() => {
+
+  }, [coordinate])
 
   // useEffect(() => {
   //   createEnemy(x, y);
@@ -79,7 +83,6 @@ const View: React.FC = () => {
         id="game-screen"
         style={{
           backgroundColor: theme.background,
-          aspectRatio: "unset"
         }}>
       </canvas>
     </StyledCanvasWrapper>

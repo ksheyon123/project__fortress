@@ -1,18 +1,9 @@
-import { useRecoilValue, useSetRecoilState, useRecoilState, useRecoilCallback } from "recoil";
+import { useRecoilValue } from "recoil";
 import {
   unitCoordinateState
 } from "../state/atom";
-import {
-  gridSpec
-} from "../constants/field";
 import { theme } from "../styles/theme";
 let ctx: CanvasRenderingContext2D;
-
-const {
-  widthNum,
-  heightNum,
-  cellSize
-} = gridSpec;
 
 export const useCreateObject = () => {
   const coordinate = useRecoilValue(unitCoordinateState);
@@ -21,9 +12,7 @@ export const useCreateObject = () => {
     y
   } = coordinate;
 
-  const draw = (canvas: HTMLCanvasElement) => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight - 170;
+  const createObj = (canvas: HTMLCanvasElement) => {
     ctx = canvas.getContext("2d")!;
     ctx.clearRect(0, 0, canvas.width, canvas.width);
     const r = 20;
@@ -36,7 +25,7 @@ export const useCreateObject = () => {
   }
 
   return {
-    draw
+    createObj
   }
 }
 

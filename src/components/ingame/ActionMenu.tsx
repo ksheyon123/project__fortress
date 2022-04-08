@@ -19,8 +19,8 @@ const StyledActionMenu = styled.div`
 const ActionMenu: React.FC = () => {
   return (
     <StyledActionMenu>
-      <Logo img={rice} />
-      <Logo img={play} />
+      <Logo height={35} img={rice} />
+      <Logo height={35} img={play} />
       <Logo img={sleep} />
       <Logo img={home} />
     </StyledActionMenu>
