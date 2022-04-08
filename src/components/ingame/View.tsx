@@ -29,22 +29,19 @@ const View: React.FC = () => {
   const [canvasY, setCanvasY] = useState<number>(0);
   const coordinate = useRecoilValue(unitCoordinateState);
 
-  const { createObj } = useCreateObject();
+  const { createCharacterArea } = useCreateObject();
 
   // Draw Canvas
   useEffect(() => {
     const canvas: HTMLCanvasElement = canvasRef.current!;
-    canvas.style.width = window.innerWidth + "px";
+
   }, [canvasRef]);
 
   useEffect(() => {
-
+    const canvas: HTMLCanvasElement = canvasRef.current!;
+    createCharacterArea(canvas);
   }, [coordinate])
 
-  // useEffect(() => {
-  //   createEnemy(x, y);
-  // }, [x, y]);
-  // canvas drag & drop !! Need to be checked. It doesn't work properly.
   useEffect(() => {
     const ref: any = canvasRef.current;
     let prevMouseX: number;
@@ -81,11 +78,13 @@ const View: React.FC = () => {
       <canvas
         ref={canvasRef as RefObject<HTMLCanvasElement>}
         id="game-screen"
+        width={window.innerWidth}
+        height={window.innerHeight - 170}
         style={{
           backgroundColor: theme.background,
         }}>
       </canvas>
-    </StyledCanvasWrapper>
+    </StyledCanvasWrapper >
 
   )
 }

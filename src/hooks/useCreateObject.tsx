@@ -2,7 +2,9 @@ import { useRecoilValue } from "recoil";
 import {
   unitCoordinateState
 } from "../state/atom";
+import { gridSpec } from "../constants/field"
 import { theme } from "../styles/theme";
+
 let ctx: CanvasRenderingContext2D;
 
 export const useCreateObject = () => {
@@ -12,20 +14,33 @@ export const useCreateObject = () => {
     y
   } = coordinate;
 
-  const createObj = (canvas: HTMLCanvasElement) => {
+  const {
+    step
+  } = gridSpec;
+
+  const innerWidth = window.innerWidth;
+  const innerHeight = window.innerHeight;
+
+  // Reverse Y Coordinate 
+  const boxSize = 50;
+  const newX = x + innerWidth / 2;
+  const newY = innerHeight - 170 - boxSize - y;
+
+  console.log(newX, newY, newX + 1, newY + 1);
+
+  const createCharacterArea = (canvas: HTMLCanvasElement) => {
     ctx = canvas.getContext("2d")!;
-    ctx.clearRect(0, 0, canvas.width, canvas.width);
-    const r = 20;
+    ctx.clearRect(newX - step - step, newY - step - step, boxSize + step + step, boxSize + step + step);
     ctx.beginPath();
-    ctx.rect(window.innerWidth / 2 - x, y + window.innerHeight - 170 - r, r, r);
-    ctx.fillStyle = theme.pixel;
-    ctx.fill();
+    ctx.rect(newX, newY, boxSize, boxSize);
+    ctx.strokeStyle = "#ddd";
+    ctx.stroke();
     ctx.closePath();
     // createGridTemplate();
   }
 
   return {
-    createObj
+    createCharacterArea
   }
 }
 
