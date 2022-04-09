@@ -5,3 +5,5 @@ export type PositionProps = {
   x: number;
   y: number;
 }
+
+export type ActionProps = "normal" | "feed" | "sleep";

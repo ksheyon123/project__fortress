@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import {
-  useRecoilState,
+  useRecoilValue,
   useSetRecoilState,
   useRecoilCallback
 } from "recoil";
 import {
   unitCoordinateState,
+  interactionState
 } from '../../state/atom';
 import {
   useCollisionCheck
@@ -25,6 +26,7 @@ const StyledController = styled.div`
 
 const Controller: React.FC = () => {
   const setCoordinate = useSetRecoilState(unitCoordinateState);
+  const interaction = useRecoilValue(interactionState);
   const { getContact } = useCollisionCheck();
   const {
     step
@@ -53,11 +55,15 @@ const Controller: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       const rnd = Math.floor(Math.random() * 2);
-      handleUnitLocation(rnd)
+      if (interaction === "normal") {
+        handleUnitLocation(rnd)
+      }
     }, 1500);
-  }, []);
+
+    return () => clearInterval(interval)
+  }, [interaction]);
 
   return (
     <StyledController>

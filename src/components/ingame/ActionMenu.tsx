@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+import { interactionState } from "../../state/atom";
+import { } from "../../state/atom";
 import { Logo } from "../common/index";
 import { theme } from '../../styles/theme';
 import rice from "../../assets/ic_rice.png";
@@ -17,9 +20,12 @@ const StyledActionMenu = styled.div`
 `;
 
 const ActionMenu: React.FC = () => {
+
+  const [isActive, setIsActive] = useRecoilState(interactionState);
+
   return (
     <StyledActionMenu>
-      <Logo height={35} img={rice} />
+      <Logo height={35} img={rice} handleOnClick={() => setIsActive("feed")} />
       <Logo height={35} img={play} />
       <Logo img={sleep} />
       <Logo img={home} />

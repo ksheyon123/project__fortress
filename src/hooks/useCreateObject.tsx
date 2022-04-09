@@ -26,11 +26,9 @@ export const useCreateObject = () => {
   const newX = x + innerWidth / 2;
   const newY = innerHeight - 170 - boxSize - y;
 
-  console.log(newX, newY, newX + 1, newY + 1);
-
   const createCharacterArea = (canvas: HTMLCanvasElement) => {
     ctx = canvas.getContext("2d")!;
-    ctx.clearRect(newX - step - step, newY - step - step, boxSize + step + step, boxSize + step + step);
+    ctx.clearRect(newX - step * 2, newY - step * 2, boxSize + step * 4, boxSize + step * 4);
     ctx.beginPath();
     ctx.rect(newX, newY, boxSize, boxSize);
     ctx.strokeStyle = "#ddd";

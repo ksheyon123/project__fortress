@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 
 interface Props {
   width?: number;
   height?: number;
-  img: any
+  img: any;
+  handleOnClick?: () => void;
 }
 
 
@@ -20,11 +21,12 @@ const Logo: React.FC<Props> = (props) => {
   const {
     width = 40,
     height = 40,
-    img
+    img,
+    handleOnClick = () => { }
   } = props;
 
   return (
-    <StyledLogo>
+    <StyledLogo onClick={handleOnClick}>
       <img src={img} width={width} height={height} />
     </StyledLogo>
   )

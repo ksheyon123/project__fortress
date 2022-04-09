@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, RefObject, useState, MouseEvent } from "react";
+import React, { useEffect, useRef, RefObject, useState, MouseEvent, MouseEventHandler } from "react";
 import styled from "styled-components";
 import {
   useRecoilValue,
@@ -12,6 +12,9 @@ import {
 import {
   useCreateObject
 } from "../../hooks/useCreateObject";
+import {
+  useInteractionWith
+} from "../../hooks/useInteractionWith";
 import { theme } from "../../styles/theme";
 
 const StyledCanvasWrapper = styled.div`
@@ -24,52 +27,25 @@ justify-content: center;
 
 const View: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>();
-
-  const [canvasX, setCanvasX] = useState<number>(0);
-  const [canvasY, setCanvasY] = useState<number>(0);
   const coordinate = useRecoilValue(unitCoordinateState);
 
   const { createCharacterArea } = useCreateObject();
-
-  // Draw Canvas
-  useEffect(() => {
-    const canvas: HTMLCanvasElement = canvasRef.current!;
-
-  }, [canvasRef]);
+  const { setContext } = useInteractionWith();
 
   useEffect(() => {
     const canvas: HTMLCanvasElement = canvasRef.current!;
     createCharacterArea(canvas);
-  }, [coordinate])
+  }, [coordinate]);
 
   useEffect(() => {
-    const ref: any = canvasRef.current;
-    let prevMouseX: number;
-    let prevMouseY: number;
-    ref.addEventListener("mousedown", (e: MouseEvent) => {
-      const x = e.screenX;
-      const y = e.screenY;
-      prevMouseX = x;
-      prevMouseY = y;
-      console.log("MouseDown (x : " + x + ", y : " + y + ')');
-    })
+    setContext(canvasRef.current!);
+  }, [canvasRef]);
 
-    ref.addEventListener("mouseup", (e: MouseEvent) => {
-      const x = e.screenX;
-      const y = e.screenY;
-      const dx = prevMouseX - x;
-      const dy = prevMouseY - y;
-
-      if (canvasX - dx < 0) {
-        setCanvasX(0);
-      } else {
-        setCanvasX(dx);
-      }
-      if (canvasY - dy < 0) {
-        setCanvasY(0);
-      } else {
-        setCanvasY(dy);
-      }
+  useEffect(() => {
+    const ref: HTMLCanvasElement = canvasRef.current!;
+    ref.addEventListener("mousedown", (evt: any) => {
+      const x = evt.nativeEvent.offsetX;
+      const y = evt.nativeEvent.offsetX;
     })
   }, []);
 
