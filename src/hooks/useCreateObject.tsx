@@ -24,7 +24,7 @@ export const useCreateObject = () => {
   // Reverse Y Coordinate 
   const boxSize = 50;
   const newX = x + innerWidth / 2;
-  const newY = innerHeight - 170 - boxSize - y;
+  const newY = innerHeight - 70 - boxSize - y;
 
   const createCharacterArea = (canvas: HTMLCanvasElement) => {
     ctx = canvas.getContext("2d")!;

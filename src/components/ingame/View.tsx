@@ -21,7 +21,7 @@ const StyledCanvasWrapper = styled.div`
 display: flex;
 justify-content: center;
   width : 100vw;
-  height : calc(100vh - 172px);
+  height : calc(100vh - 72px);
   overflow: hidden;
 `;
 
@@ -55,7 +55,7 @@ const View: React.FC = () => {
         ref={canvasRef as RefObject<HTMLCanvasElement>}
         id="game-screen"
         width={window.innerWidth}
-        height={window.innerHeight - 170}
+        height={window.innerHeight - 70}
         style={{
           backgroundColor: theme.background,
         }}>

@@ -12,7 +12,7 @@ export const useInteractionWith = () => {
 
   const boxSize = 50;
 
-  const newY = innerHeight - 170 - boxSize;
+  const newY = innerHeight - 70 - boxSize;
 
   const setContext = (canvas: HTMLCanvasElement) => {
     ctx = canvas.getContext("2d")!;

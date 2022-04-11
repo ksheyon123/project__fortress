@@ -19,7 +19,7 @@ import { theme } from "../../styles/theme";
 
 const StyledController = styled.div`
   width : 100vw;
-  height : ${theme.controllerHeight};
+  /* height : ${theme.controllerHeight}; */
   background-color: ${theme.background};
   border-top: 1px solid ${theme.pixel};
 `;
