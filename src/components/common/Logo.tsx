@@ -27,7 +27,7 @@ const Logo: React.FC<Props> = (props) => {
 
   return (
     <StyledLogo onClick={handleOnClick}>
-      <img src={img} width={width} height={height} />
+      <img src={img} width={width} height={height} alt="logo_img" />
     </StyledLogo>
   )
 }
