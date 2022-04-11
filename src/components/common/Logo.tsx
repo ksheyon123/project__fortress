@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-interface Props {
+interface ILogoProps {
   width?: number;
   height?: number;
   img: any;
@@ -16,7 +16,7 @@ const StyledLogo = styled.div`
   align-items: center;
 `
 
-const Logo: React.FC<Props> = (props) => {
+const Logo: React.FC<ILogoProps> = (props) => {
 
   const {
     width = 40,
