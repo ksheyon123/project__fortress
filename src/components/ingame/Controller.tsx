@@ -19,7 +19,7 @@ import { theme } from "../../styles/theme";
 
 const StyledController = styled.div`
   width : 100vw;
-  height : 100px;
+  height : ${theme.controllerHeight};
   background-color: ${theme.background};
   border-top: 1px solid ${theme.pixel};
 `;
@@ -66,10 +66,7 @@ const Controller: React.FC = () => {
   }, [interaction]);
 
   return (
-    <StyledController>
-
-
-    </StyledController>
+    <StyledController />
   )
 }
 

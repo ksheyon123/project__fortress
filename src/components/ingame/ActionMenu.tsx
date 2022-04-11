@@ -14,7 +14,7 @@ const StyledActionMenu = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   width : 100vw;
-  height : 70px;
+  height : ${theme.headerHeight};
   background-color: ${theme.background};
   border-bottom: 1px solid ${theme.pixel};
 `;
