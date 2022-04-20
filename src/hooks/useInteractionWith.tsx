@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { interactionState } from "../state/atom";
-
+import rice from "../assets/ic_rice.png";
 let ctx: CanvasRenderingContext2D;
 
 export const useInteractionWith = () => {
@@ -30,7 +30,7 @@ export const useInteractionWith = () => {
 
     if (isActive) {
       const intervalId = setInterval(() => {
-        ctx.clearRect(innerWidth / 2, newY, boxSize + 1, idx * 15);
+        ctx.clearRect(innerWidth / 3, newY, boxSize + 1, idx * 15);
         if (idx === 4) {
           setInteraction("normal");
           setIsActive(false);
@@ -43,10 +43,11 @@ export const useInteractionWith = () => {
   }, [isActive]);
 
   const handleUpdate = () => {
+    const _img = new Image();
+    _img.src = rice;
     ctx.clearRect(0, 0, innerWidth, innerHeight);
     ctx.beginPath();
-    ctx.fillRect(innerWidth / 2, newY, boxSize, boxSize);
-    ctx.fillStyle = "#323232"
+    ctx.drawImage(_img, innerWidth / 3, newY, 50, 45)
     ctx.closePath();
     setIsActive(true);
   }
