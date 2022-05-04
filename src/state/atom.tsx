@@ -1,14 +1,19 @@
 import { atom } from "recoil";
-import { PositionProps, ActionProps } from "../constants/types";
+import { Coordinate, ActionProps } from "../constants/types";
 // 0 right, 1 left, 2 up, 3 bottom
-const unitCoordinateState = atom<PositionProps>({
+const unitCoordinateState = atom<Coordinate>({
   key: "unitCoordinateState",
   default: {
-    lookingDirection: 0,
     x: 0,
     y: 0,
   },
 });
+
+// 0 : right. 1 : left
+const unitDirectionState = atom<number>({
+  key: "unitCoordinateState",
+  default: 0
+})
 
 const canvasColorState = atom<string>({
   key: "canvasColorState",

@@ -1,7 +1,6 @@
 import { Direction } from "./enums";
 
-export type PositionProps = {
-  lookingDirection: Direction;
+export type Coordinate = {
   x: number;
   y: number;
 }

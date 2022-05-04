@@ -38,7 +38,6 @@ const Controller: React.FC = () => {
     if (direction === 0) {
       updatedCoordinate = {
         ..._coordinate,
-        lookingDirection: 0,
         x: _coordinate.x + step
       }
     }
@@ -46,7 +45,6 @@ const Controller: React.FC = () => {
     if (direction === 1) {
       updatedCoordinate = {
         ..._coordinate,
-        lookingDirection: 1,
         x: _coordinate.x - step
       }
     }
