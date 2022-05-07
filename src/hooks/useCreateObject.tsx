@@ -27,11 +27,12 @@ export const useCreateObject = () => {
   const newY = innerHeight - 70 - boxSize - y;
 
   const createCharacterArea = (canvas: HTMLCanvasElement) => {
+    console.log(newX, newY, boxSize, boxSize)
     ctx = canvas.getContext("2d")!;
     ctx.clearRect(newX - step * 2, newY - step * 2, boxSize + step * 4, boxSize + step * 4);
     ctx.beginPath();
     ctx.rect(newX, newY, boxSize, boxSize);
-    ctx.strokeStyle = "#ddd";
+    ctx.strokeStyle = "#000";
     ctx.stroke();
     ctx.closePath();
     // createGridTemplate();

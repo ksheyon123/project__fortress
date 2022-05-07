@@ -27,7 +27,6 @@ const StyledController = styled.div`
 const Controller: React.FC = () => {
   const setCoordinate = useSetRecoilState(unitCoordinateState);
   const interaction = useRecoilValue(interactionState);
-  const { getContact } = useCollisionCheck();
   const {
     step
   } = gridSpec;
