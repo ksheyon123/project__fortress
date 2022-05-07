@@ -15,7 +15,6 @@ const StyledFlex = styled.div<{ isJustifyedCenter?: boolean; isAlignedCenter?: b
   isJustifyedCenter = true,
   isAlignedCenter = true
 }) => {
-
   return `
   display : flex;
   width : 100%;
@@ -43,9 +42,7 @@ const LoginPage: React.FC = () => {
         <StyledLogin>
           <Input title="ID" value={userId} setValue={setUserId} placeholder={"사용자 ID를 입력해 주세요."} />
           <Input title="PASSWORD" value={userId} setValue={setUserId} placeholder={"사용자 ID를 입력해 주세요."} />
-          <div>
-            <Button />
-          </div>
+          <Button name="로그인" handleOnClick={() => { }} />
         </StyledLogin>
       </StyledFlex>
     </StyledContainer>

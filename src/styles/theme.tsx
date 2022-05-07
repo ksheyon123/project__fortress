@@ -10,6 +10,7 @@ export const theme = {
 
   err: "#F5211D",
 
+  mono100: "#FFF",
   mono3Div: "#C8C8C8",
   mono6BG: "#EBEBEB",
 
