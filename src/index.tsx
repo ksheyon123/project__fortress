@@ -6,7 +6,7 @@ import {
 import {
   RecoilRoot
 } from "recoil"
-import './index.css';
+import './styles/global.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

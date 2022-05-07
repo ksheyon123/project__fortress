@@ -11,7 +11,13 @@ export const theme = {
   err: "#F5211D",
 
   mono3Div: "#C8C8C8",
+  mono6BG: "#EBEBEB",
 
   headerHeight: "70px",
   controllerHeight: "100px",
+
+  b2: {
+    fontSize: "18px",
+    fontWeight: 600
+  }
 }

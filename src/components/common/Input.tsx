@@ -16,12 +16,24 @@ interface IProps {
 }
 
 const StyledInput = styled.div<{ type: "vertical" | "horizontal"; icon?: string; width: number; }>`
-  width : ${props => props.width + "px"};
+  width : 400px;
   margin-bottom : 20px;
   & > div.input-area {
     display: ${props => props.type === "vertical" ? "block" : "flex"};
+    & > div.input-title {
+      ${theme.b2}
+      margin-bottom : 10px;
+    } 
     & > input {
+      width : ${props => props.width - 40 + "px"};
       padding : 10px 20px;
+      border-radius : 5px;
+      border : 1px solid ${theme.primary};
+      background-color: ${theme.mono6BG};
+
+    }
+    & > span {
+      margin-left : 15px;
     }
   }
   & > div.err-txt {
@@ -38,9 +50,9 @@ const Input: React.FC<IProps> = (props) => {
     width = 350,
     disabled = false,
     placeholder = "",
-    title = "a",
-    err = "a",
-    desc = "a",
+    title = "",
+    err = "",
+    desc = "",
     type = "vertical"
   } = props;
 
