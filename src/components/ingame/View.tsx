@@ -2,6 +2,7 @@ import React, { useEffect, useRef, RefObject, useState, MouseEvent, MouseEventHa
 import styled from "styled-components";
 import {
   useRecoilValue,
+  useRecoilState
 } from 'recoil';
 import {
   unitCoordinateState,
@@ -24,11 +25,20 @@ justify-content: center;
 
 const View: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>();
-  const coordinate = useRecoilValue(unitCoordinateState);
+  const [coordinate, setCoordinate] = useRecoilState(unitCoordinateState);
 
   const { createCharacterArea } = useCreateObject();
   const { setContext } = useInteractionWith();
 
+  useEffect(() => {
+    const innerWidth = window.innerWidth;
+    setCoordinate({
+      x: innerWidth / 2,
+      y: 0,
+    })
+  }, []);
+
+  // Draw Character Area. Put Character into this area;
   useEffect(() => {
     const canvas: HTMLCanvasElement = canvasRef.current!;
     createCharacterArea(canvas);
@@ -37,14 +47,6 @@ const View: React.FC = () => {
   useEffect(() => {
     setContext(canvasRef.current!);
   }, [canvasRef]);
-
-  useEffect(() => {
-    const ref: HTMLCanvasElement = canvasRef.current!;
-    ref.addEventListener("mousedown", (evt: any) => {
-      const x = evt.nativeEvent.offsetX;
-      const y = evt.nativeEvent.offsetX;
-    })
-  }, []);
 
   return (
     <StyledCanvasWrapper>

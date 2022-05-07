@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import {
   unitCoordinateState
 } from "../state/atom";
@@ -18,16 +18,15 @@ export const useCreateObject = () => {
     step
   } = gridSpec;
 
-  const innerWidth = window.innerWidth;
+  // const innerWidth = window.innerWidth;
   const innerHeight = window.innerHeight;
 
   // Reverse Y Coordinate 
   const boxSize = 50;
-  const newX = x + innerWidth / 2;
+  const newX = x;
   const newY = innerHeight - 70 - boxSize - y;
 
   const createCharacterArea = (canvas: HTMLCanvasElement) => {
-    console.log(newX, newY, boxSize, boxSize)
     ctx = canvas.getContext("2d")!;
     ctx.clearRect(newX - step * 2, newY - step * 2, boxSize + step * 4, boxSize + step * 4);
     ctx.beginPath();

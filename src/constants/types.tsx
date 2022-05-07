@@ -6,9 +6,9 @@ export type DrawerType = {
   linkTo: string;
 }
 
-export type Coordinate = {
+export type CoordinateType = {
   x: number;
   y: number;
 }
 
-export type ActionProps = "normal" | "feed" | "sleep";
+export type ActionType = "normal" | "feed" | "sleep";

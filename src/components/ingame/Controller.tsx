@@ -7,6 +7,7 @@ import {
 } from "recoil";
 import {
   unitCoordinateState,
+  unitDirectionState,
   interactionState
 } from '../../state/atom';
 import {
@@ -27,24 +28,27 @@ const StyledController = styled.div`
 const Controller: React.FC = () => {
   const setCoordinate = useSetRecoilState(unitCoordinateState);
   const interaction = useRecoilValue(interactionState);
+  const { getImpact } = useCollisionCheck()
   const {
     step
   } = gridSpec;
 
-  const handleUnitLocation = useRecoilCallback(({ snapshot }) => async (direction: number) => {
-    const _coordinate = await snapshot.getPromise(unitCoordinateState);
-    let updatedCoordinate = _coordinate;
+  const handleUnitLocation = useRecoilCallback(({ snapshot }) => async () => {
+    const coordinate = await snapshot.getPromise(unitCoordinateState);
+    const direction = await snapshot.getPromise(unitDirectionState);
+
+    let updatedCoordinate = coordinate;
     if (direction === 0) {
       updatedCoordinate = {
-        ..._coordinate,
-        x: _coordinate.x + step
+        ...coordinate,
+        x: coordinate.x + step
       }
     }
 
     if (direction === 1) {
       updatedCoordinate = {
-        ..._coordinate,
-        x: _coordinate.x - step
+        ...coordinate,
+        x: coordinate.x - step
       }
     }
     setCoordinate(updatedCoordinate)
@@ -52,14 +56,15 @@ const Controller: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const rnd = Math.floor(Math.random() * 2);
+    const intervalId = setInterval(async () => {
       if (interaction === "normal") {
-        handleUnitLocation(rnd)
+        handleUnitLocation();
+        await getImpact();
       }
-    }, 1500);
 
-    return () => clearInterval(interval)
+    }, 200);
+
+    return () => clearInterval(intervalId)
   }, [interaction]);
 
   return (

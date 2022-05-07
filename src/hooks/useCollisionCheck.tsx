@@ -1,23 +1,38 @@
-import { useRecoilValue, useSetRecoilState, useRecoilState, useRecoilCallback } from "recoil";
-import {
-  unitCoordinateState
-} from "../state/atom";
-import {
-  Coordinate
-} from "../constants/types"
-export const useCollisionCheck = () => {
+import { useRecoilCallback, useSetRecoilState } from "recoil";
+import { unitCoordinateState, unitDirectionState } from "../state/atom";
+import { gridSpec } from "../constants/field";
 
-  const getContact = useRecoilCallback(({ snapshot }) => async (willUpdateCoordinate: Coordinate) => {
-    const {
-      x,
-      y
-    } = willUpdateCoordinate;
-    const ex = 50;
-    const ey = 100;
-    const r = 10 / 2;
-  }, []);
+export const useCollisionCheck = () => {
+  const {
+    cellSize,
+    step
+  } = gridSpec;
+  const innerWidth = window.innerWidth;
+
+  const setUnitDirection = useSetRecoilState(unitDirectionState);
+
+  const getImpact = useRecoilCallback(({ snapshot }) => async () => {
+    try {
+
+      const coordinate = await snapshot.getPromise(unitCoordinateState);
+      const {
+        x,
+      } = coordinate;
+      if (x + cellSize >= innerWidth - step) {
+        setUnitDirection(1);
+        return true;
+      } else if (x <= step) {
+        setUnitDirection(0);
+        return true;
+      }
+      return false;
+
+    } catch (e) {
+      throw e;
+    }
+  }, [innerWidth]);
 
   return {
-    getContact
+    getImpact
   }
 }

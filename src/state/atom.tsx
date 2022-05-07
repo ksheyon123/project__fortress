@@ -1,7 +1,7 @@
 import { atom } from "recoil";
-import { Coordinate, ActionProps } from "../constants/types";
-// 0 right, 1 left, 2 up, 3 bottom
-const unitCoordinateState = atom<Coordinate>({
+import { CoordinateType, ActionType } from "../constants/types";
+
+const unitCoordinateState = atom<CoordinateType>({
   key: "unitCoordinateState",
   default: {
     x: 0,
@@ -11,7 +11,7 @@ const unitCoordinateState = atom<Coordinate>({
 
 // 0 : right. 1 : left
 const unitDirectionState = atom<number>({
-  key: "unitCoordinateState",
+  key: "unitDirectionState",
   default: 0
 })
 
@@ -25,13 +25,14 @@ const canvasBrushThicknessState = atom<string>({
   default: "1px",
 });
 
-const interactionState = atom<ActionProps>({
+const interactionState = atom<ActionType>({
   key: "game__interactionState",
   default: "normal"
 });
 
 export {
   unitCoordinateState,
+  unitDirectionState,
   canvasColorState,
   canvasBrushThicknessState,
   interactionState
