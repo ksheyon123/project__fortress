@@ -19,8 +19,8 @@ const StyledLogo = styled.div`
 const Logo: React.FC<Props> = (props) => {
 
   const {
-    width = 40,
-    height = 40,
+    width = 30,
+    height = 30,
     img,
     handleOnClick = () => { }
   } = props;

@@ -7,9 +7,6 @@ import {
   unitCoordinateState,
 } from "../../state/atom";
 import {
-  gridSpec,
-} from "../../constants/field";
-import {
   useCreateObject
 } from "../../hooks/useCreateObject";
 import {
@@ -57,7 +54,7 @@ const View: React.FC = () => {
         width={window.innerWidth}
         height={window.innerHeight - 70}
         style={{
-          backgroundColor: theme.background,
+          backgroundColor: theme.mono100,
         }}>
       </canvas>
     </StyledCanvasWrapper >
