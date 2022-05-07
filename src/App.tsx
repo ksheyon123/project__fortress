@@ -10,13 +10,13 @@ import {
 } from "./pages/index";
 import {
   PATHNAME
-} from "./constants/pathname";
+} from "./constants/index";
 
 const App = () => {
   return (
     <Routes>
       <Route path={PATHNAME.LOGIN} element={<LoginPage />} />
-      <Route path={PATHNAME.PATH__INGAME} element={<InGamePage />} />
+      <Route path={PATHNAME.INGAME} element={<InGamePage />} />
       <Route path={PATHNAME.CREATE__NFT} element={<CreateNFTPage />} />
     </Routes>
   );

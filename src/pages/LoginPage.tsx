@@ -42,7 +42,7 @@ const LoginPage: React.FC = () => {
         <StyledLogin>
           <Input title="ID" value={userId} setValue={setUserId} placeholder={"사용자 ID를 입력해 주세요."} />
           <Input title="PASSWORD" value={userId} setValue={setUserId} placeholder={"사용자 ID를 입력해 주세요."} />
-          <Button name="로그인" handleOnClick={() => { }} />
+          <Button name="로그인" handleOnClick={() => window.location.href = "/game"} />
         </StyledLogin>
       </StyledFlex>
     </StyledContainer>
